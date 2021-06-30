@@ -1,16 +1,19 @@
 package com.enigma.pocket.service;
 
+import com.enigma.pocket.dto.CustomerLoginDto;
 import com.enigma.pocket.dto.CustomerSearchDto;
 import com.enigma.pocket.entity.Customer;
-import com.enigma.pocket.exception.CustomerNotFoundException;
 import com.enigma.pocket.repository.CustomerRepository;
 import com.enigma.pocket.specification.CustomerSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
@@ -33,20 +36,28 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public void createCustomer(Customer customer) {
-//        validatePresent(customer.getId());
-        customerRepository.save(customer);
+    public Customer customerLogin(CustomerLoginDto customerLoginDto) {
+        Customer login = customerRepository.findCustomerLogin(customerLoginDto.getEmail(), customerLoginDto.getPassword());
+        if (login == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format(notFoundMessage, customerLoginDto));
+        }
+        return login;
     }
 
     @Override
-    public void updateCustomer(Customer customer) {
+    public Customer createCustomer(Customer customer) {
+         return customerRepository.save(customer);
+    }
+
+    @Override
+    public Customer updateCustomer(Customer customer) {
         validatePresent(customer.getId());
-        customerRepository.save(customer);
+        return customerRepository.save(customer);
     }
 
     @Override
-        public void removeCustomer(String id) {
-            validatePresent(id);
+    public void removeCustomer(String id) {
+        validatePresent(id);
         customerRepository.deleteById(id);
     }
 

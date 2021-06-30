@@ -22,7 +22,7 @@ public class ProductHistoryPrice {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    @JsonIgnoreProperties({"productHistoryPrices"})
+    @JsonIgnore
     private Product product;
 
     public ProductHistoryPrice() {

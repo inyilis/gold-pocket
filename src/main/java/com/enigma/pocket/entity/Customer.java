@@ -22,6 +22,7 @@ public class Customer {
     private String lastName;
     @Column(name = "birth_date")
     private Date birthDate;
+    private String phoneNumber;
     private String address;
     private Integer status;
     private String username;
@@ -61,6 +62,14 @@ public class Customer {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getAddress() {

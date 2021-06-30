@@ -58,13 +58,13 @@ public class PocketServiceImpl implements PocketService{
     }
 
     @Override
-    public void updatePocket(Customer customer) {
-
+    public Pocket updatePocket(Pocket pocket) {
+        return pocketRepository.save(pocket);
     }
 
     @Override
     public void removePocket(String id) {
-
+        pocketRepository.deleteById(id);
     }
 
     private void validateQty(Double checkQty) {

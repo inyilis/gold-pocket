@@ -26,8 +26,18 @@ public class CustomerSpecification {
                 }
 
                 if (!(customerSearchForm.getLastName() == null || customerSearchForm.getLastName().equals(""))) {
-                    final Predicate lastNamePredicate = criteriaBuilder.like(root.get("firstName"), "%" + customerSearchForm.getLastName() + "%");
+                    final Predicate lastNamePredicate = criteriaBuilder.like(root.get("lastName"), "%" + customerSearchForm.getLastName() + "%");
                     predicates.add(lastNamePredicate);
+                }
+
+                if (!(customerSearchForm.getEmail() == null || customerSearchForm.getEmail().equals(""))) {
+                    final Predicate emailPredicate = criteriaBuilder.like(root.get("email"), "%" + customerSearchForm.getEmail() + "%");
+                    predicates.add(emailPredicate);
+                }
+
+                if (!(customerSearchForm.getPassword() == null || customerSearchForm.getPassword().equals(""))) {
+                    final Predicate passwordPredicate = criteriaBuilder.like(root.get("password"), "%" + customerSearchForm.getPassword() + "%");
+                    predicates.add(passwordPredicate);
                 }
 
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));

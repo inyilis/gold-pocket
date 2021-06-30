@@ -22,6 +22,7 @@ public class Pocket {
     private Customer customer;
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JsonIgnoreProperties({"productHistoryPrices"})
     private Product product;
 
     public String getId() {

@@ -1,5 +1,6 @@
 package com.enigma.pocket.controller;
 
+import com.enigma.pocket.dto.CustomerLoginDto;
 import com.enigma.pocket.dto.CustomerSearchDto;
 import com.enigma.pocket.entity.Customer;
 import com.enigma.pocket.entity.Pocket;
@@ -41,14 +42,19 @@ public class CustomerRestController {
         return customerService.findCustomers(customerSearchForm, pageable);
     }
 
+    @PostMapping(value = "/customer/login")
+    public Customer loginCustomer(@RequestBody CustomerLoginDto loginDto){
+        return customerService.customerLogin(loginDto);
+    }
+
     @PostMapping("/customer")
-    public void createNewCustomer(@RequestBody Customer customer) {
-        customerService.createCustomer(customer);
+    public Customer createNewCustomer(@RequestBody Customer customer) {
+        return customerService.createCustomer(customer);
     }
 
     @PutMapping("/customer")
-    public void updateCustomer(@RequestBody Customer customer) {
-        customerService.updateCustomer(customer);
+    public Customer updateCustomer(@RequestBody Customer customer) {
+        return customerService.updateCustomer(customer);
     }
 
     @DeleteMapping("/customer/{id}")

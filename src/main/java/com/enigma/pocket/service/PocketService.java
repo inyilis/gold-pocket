@@ -13,7 +13,7 @@ public interface PocketService {
     public List<Pocket> findAllPocket();
     public List<Pocket> findPocketByCustomer(String customerId);
     public Pocket createPocket(Pocket pocket);
-    public void updatePocket(Customer customer);
+    public Pocket updatePocket(Pocket pocket);
     public void removePocket(String id);
     void topUp(Pocket pocket, Double qty);
     void selling(Pocket pocket, Double qty);
